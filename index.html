@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>PCon - PC Configuration Calculator</title>
+<title>PCon - PC Configuration </title>
 <style>
   :root{
     --bg:#e8eef6;--card:#e6ecf3;--muted:#6b7280;--accent:#6b8cff;
@@ -12,39 +12,29 @@
     --radius:18px;
   }
   .dark{--bg:#121217;--card:#1b1b1f;--muted:#9aa0ab;--accent:#6b8cff;--shadow1:8px 8px 20px rgba(0,0,0,0.6);--shadow2:-8px -8px 20px rgba(40,40,46,0.6)}
-
   *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui,Segoe UI,Roboto,"Helvetica Neue",Arial;}
   html,body{height:100%;margin:0;background:var(--bg);transition:background .25s ease}
-
   .wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
-  .app{width:100%;max-width:520px;background:var(--card);border-radius:28px;padding:20px 18px;box-shadow:var(--shadow1),var(--shadow2);text-align:center}
-
+  .app{width:100%;max-width:600px;background:var(--card);border-radius:28px;padding:20px 18px;box-shadow:var(--shadow1),var(--shadow2);text-align:center}
   .brand{display:flex;gap:12px;align-items:center;justify-content:center}
   .icon{width:64px;height:64px;border-radius:14px;display:grid;place-items:center;background:linear-gradient(145deg,#f3f8ff,#dbe7ff);box-shadow:inset 6px 6px 12px rgba(255,255,255,0.6),inset -6px -6px 12px rgba(160,180,220,0.2)}
   .dark .icon{background:linear-gradient(145deg,#222227,#141416);box-shadow:inset 6px 6px 12px rgba(0,0,0,0.6),inset -6px -6px 12px rgba(60,60,64,0.6)}
   .title{font-size:1.15rem;font-weight:700}
   .subtitle{font-size:0.82rem;color:var(--muted)}
-
   form{margin-top:14px;display:flex;flex-direction:column;gap:12px;align-items:stretch}
   .row{display:flex;gap:10px}
   .col{flex:1}
   label{display:block;font-size:0.78rem;margin-bottom:6px;color:var(--muted);text-align:left}
-
   input[type="number"],select{width:100%;padding:12px;border-radius:12px;border:none;background:var(--card);box-shadow:inset 6px 6px 12px rgba(174,184,203,0.35),inset -6px -6px 12px rgba(255,255,255,0.9);font-size:0.95rem}
   .dark input[type="number"],.dark select{box-shadow:inset 6px 6px 12px rgba(0,0,0,0.6),inset -6px -6px 12px rgba(60,60,64,0.6);background:var(--card);color:#e6eef6}
-
   .row .col input, .row .col select{width:100%}
-
   .controls{display:flex;gap:10px;margin-top:8px}
   button{flex:1;padding:12px;border-radius:12px;border:none;font-weight:600;cursor:pointer;background:linear-gradient(145deg,#f1f6ff,#dce8ff);box-shadow:6px 6px 16px rgba(174,184,203,0.45),-6px -6px 16px rgba(255,255,255,0.9)}
   .dark button{background:linear-gradient(145deg,#222227,#131316);box-shadow:6px 6px 16px rgba(0,0,0,0.6),-6px -6px 16px rgba(60,60,64,0.6);color:#e6eef6}
-
   .result{margin-top:14px;padding:14px;border-radius:12px;background:linear-gradient(180deg,rgba(255,255,255,0.6),rgba(255,255,255,0.35));box-shadow:6px 6px 16px rgba(174,184,203,0.35),-6px -6px 16px rgba(255,255,255,0.9)}
   .dark .result{background:linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.01))}
   .score{font-size:1.1rem;font-weight:700}
   .meta{font-size:0.86rem;color:var(--muted);margin-top:6px}
-  .cost{font-size:0.95rem;font-weight:600;margin-top:6px;color:#1a202c}
-
   footer{margin-top:20px;font-size:0.78rem;color:var(--muted)}
   @media (max-width:420px){.app{padding:18px 14px;border-radius:20px}.icon{width:56px;height:56px}}
 </style>
@@ -61,41 +51,48 @@
       </div>
       <div>
         <div class="title">PCon</div>
-        <div class="subtitle">Estimate AI training/inference suitability — offline • vertical • neumorphism</div>
+        <div class="subtitle">Estimate AI training/inference Suitability </div>
       </div>
     </div>
 
     <form id="form" onsubmit="event.preventDefault();calculate();">
+
       <div class="row">
         <div class="col">
           <label for="cpu">CPU Model</label>
-          <select id="cpu"></select>
+          <select id="cpu" aria-label="CPU Model"></select>
         </div>
         <div class="col">
           <label for="gpu">GPU Model</label>
-          <select id="gpu"></select>
+          <select id="gpu" aria-label="GPU Model"></select>
         </div>
       </div>
 
       <div class="row">
         <div class="col">
-          <label for="tpu">TPU/NPU</label>
-          <select id="tpu"><option>None</option><option>Google TPU v4</option><option>Apple Neural Engine</option><option>Qualcomm Hexagon</option></select>
+          <label for="tpu">TPU/NPU Model</label>
+          <select id="tpu">
+            <option>None</option>
+            <option>Google TPU v4</option>
+            <option>Apple Neural Engine</option>
+            <option>Qualcomm Hexagon</option>
+            <option>NVIDIA Tensor Core</option>
+          </select>
         </div>
         <div class="col">
           <label for="vram">VRAM (GB)</label>
-          <input id="vram" type="number" min="0" step="1" value="24"/>
+          <input id="vram" type="number" min="0" step="1" placeholder="e.g., 24" />
         </div>
       </div>
 
       <div class="row">
         <div class="col">
           <label for="ram">RAM (GB)</label>
-          <input id="ram" type="number" min="0" step="1" value="64"/>
+          <input id="ram" type="number" min="0" step="1" placeholder="e.g., 64" />
         </div>
         <div class="col">
           <label for="ramSpeed">RAM Speed (MHz)</label>
-          <input id="ramSpeed" type="number" min="0" step="1" value="3600"/>
+          <input id="ramSpeed" type="number" min="0" step="1" placeholder="e.g., 3600" />
         </div>
       </div>
 
@@ -113,22 +110,41 @@
       <div class="row">
         <div class="col">
           <label for="nvme">NVMe Read Speed (MB/s)</label>
-          <input id="nvme" type="number" min="0" step="10" value="5000"/>
+          <input id="nvme" type="number" min="0" step="10" placeholder="e.g., 5000" />
         </div>
         <div class="col">
           <label for="storage">Primary Storage</label>
-          <select id="storage"><option>512 GB SSD</option><option>1 TB SSD</option><option>2 TB SSD</option><option>4 TB HDD</option></select>
+          <select id="storage">
+            <option>512 GB SSD</option>
+            <option>1 TB SSD</option>
+            <option>2 TB SSD</option>
+            <option>4 TB HDD</option>
+          </select>
         </div>
       </div>
 
       <div class="row">
         <div class="col">
           <label for="power">Estimated PSU (W)</label>
-          <input id="power" type="number" min="0" step="10" value="750"/>
+          <input id="power" type="number" min="0" step="10" placeholder="e.g., 750" />
         </div>
         <div class="col">
-          <label for="customCost">Custom Component Cost ($)</label>
-          <input id="customCost" type="number" min="0" step="1" value="0"/>
+          <label for="customCost">Custom Component Cost (₹/$)</label>
+          <input id="customCost" type="number" min="0" step="1" placeholder="Optional additional components"/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+          <label for="currency">Currency</label>
+          <select id="currency">
+            <option value="INR">INR</option>
+            <option value="USD">USD</option>
+          </select>
+        </div>
+        <div class="col">
+          <label for="exportBtn">Export/Share</label>
+          <button type="button" id="exportBtn" onclick="exportReport()">Export Report</button>
         </div>
       </div>
 
@@ -136,12 +152,13 @@
         <button type="button" onclick="resetForm()">Reset</button>
         <button type="submit">Calculate</button>
       </div>
+
     </form>
 
     <section class="result" id="resultCard" aria-live="polite" hidden>
       <div class="score" id="scoreText">Estimated AI Performance Score: —</div>
       <div class="meta" id="metaText">—</div>
-      <div class="cost" id="costText">💰 Estimated System Cost: —</div>
+      <div class="meta" id="systemCost">Estimated System Cost: —</div>
     </section>
 
     <div class="controls" style="margin-top:12px">
@@ -153,76 +170,143 @@
 </div>
 
 <script>
-const cpuList = ['AMD Ryzen 5 5600X','AMD Ryzen 7 5800X','AMD Ryzen 9 5900X','AMD Ryzen 9 7950X','Intel Core i5-12400','Intel Core i7-13700K','Intel Core i9-13900K','Intel Core i9-14900K'].sort((a,b)=>a.localeCompare(b,'en',{sensitivity:'base'}));
-const gpuList = ['AMD Radeon RX 6600','AMD Radeon RX 6700 XT','AMD Radeon RX 6800','AMD Radeon RX 7900 XTX','NVIDIA RTX 3060','NVIDIA RTX 3070','NVIDIA RTX 3080','NVIDIA RTX 3090','NVIDIA RTX 4060','NVIDIA RTX 4070','NVIDIA RTX 4080','NVIDIA RTX 4090'].sort((a,b)=>a.localeCompare(b,'en',{sensitivity:'base'}));
+  // --- CPU & GPU lists (full variations) ---
+  const cpuList = [
+    'Intel Pentium Gold G7400','Intel Core i3-12100','AMD Ryzen 3 4100','AMD Athlon 3000G','Intel Core i3-13100',
+    'Intel Core i5-12400','Intel Core i5-13400','AMD Ryzen 5 5600X','AMD Ryzen 5 7600','Intel Core i7-13700K',
+    'Intel Core i7-14700K','Intel Core i9-13900K','Intel Core i9-14900K','AMD Ryzen 9 5900X','AMD Ryzen 9 7950X'
+  ].sort((a,b)=>a.localeCompare(b,'en',{sensitivity:'base'}));
 
-function populate(id,arr){ const el=document.getElementById(id); arr.forEach(v=>{ const o=document.createElement('option'); o.textContent=v; el.appendChild(o); }); }
-populate('cpu',cpuList); populate('gpu',gpuList);
+  const gpuList = [
+    'NVIDIA GTX 1050 Ti','NVIDIA GTX 1650','NVIDIA GTX 1660','AMD Radeon RX 6400','AMD Radeon RX 6500 XT',
+    'NVIDIA RTX 3060','NVIDIA RTX 3060 Ti','NVIDIA RTX 3070','AMD Radeon RX 6600 XT','AMD Radeon RX 6700 XT',
+    'NVIDIA RTX 3080','NVIDIA RTX 3080 Ti','NVIDIA RTX 3090','NVIDIA RTX 4080','NVIDIA RTX 4090',
+    'AMD Radeon RX 7900 XT','AMD Radeon RX 7900 XTX'
+  ].sort((a,b)=>a.localeCompare(b,'en',{sensitivity:'base'}));
 
-const body=document.body;
-function applyDark(pref){ if(pref) body.classList.add('dark'); else body.classList.remove('dark'); }
-const prefers = localStorage.getItem('dark-mode'); applyDark(prefers==='1');
-function toggleDark(){ const on = !body.classList.contains('dark'); applyDark(on); localStorage.setItem('dark-mode', on?'1':'0'); }
+  // Populate dropdowns
+  function populate(id,arr){
+    const el=document.getElementById(id);
+    el.innerHTML=''; arr.forEach(v=>{ const o=document.createElement('option'); o.textContent=v; el.appendChild(o); });
+  }
+  populate('cpu',cpuList);
+  populate('gpu',gpuList);
 
-let currency='USD'; 
-const exchangeRate = 83; // 1 USD = 83 INR
-const currencyBtn=document.createElement('button');
-currencyBtn.type='button'; currencyBtn.textContent='Currency: USD';
-currencyBtn.onclick = () => { currency = currency==='USD'?'INR':'USD'; currencyBtn.textContent='Currency: '+currency; if(!document.getElementById('resultCard').hidden){ calculate(); } };
-document.querySelector('.controls').appendChild(currencyBtn);
+  // Dark mode
+  const body=document.body;
+  function applyDark(pref){ body.classList.toggle('dark', pref); }
+  const prefers = localStorage.getItem('dark-mode'); applyDark(prefers==='1');
+  function toggleDark(){ const on=!body.classList.contains('dark'); applyDark(on); localStorage.setItem('dark-mode',on?'1':'0'); }
 
-function val(id,fallback=0){ const el=document.getElementById(id); const n=parseFloat(el.value); return Number.isFinite(n)?n:fallback }
+  // Helper
+  function val(id,f=0){ const n=parseFloat(document.getElementById(id).value); return Number.isFinite(n)?n:f; }
 
-function calculate(){
-  const cpu=document.getElementById('cpu').value;
-  const gpu=document.getElementById('gpu').value;
-  const tpu=document.getElementById('tpu').value;
-  const vram=val('vram'); const ram=val('ram'); const ramSpeed=val('ramSpeed');
-  const ramChannels=document.getElementById('ramChannels').value;
-  const pcie=parseFloat(document.getElementById('pcie').value);
-  const nvme=val('nvme'); const power=val('power'); const customCost=val('customCost');
+  // --- Core calculation ---
+  function calculate(){
+    const cpu=document.getElementById('cpu').value;
+    const gpu=document.getElementById('gpu').value;
+    const tpu=document.getElementById('tpu').value;
+    const vram=val('vram'); const ram=val('ram'); const ramSpeed=val('ramSpeed');
+    const ramChannels=document.getElementById('ramChannels').value;
+    const pcie=parseFloat(document.getElementById('pcie').value);
+    const nvme=val('nvme'); const power=val('power'); const storage=document.getElementById('storage').value;
+    const customCost=val('customCost'); const currency=document.getElementById('currency').value;
 
-  if(!cpu || !gpu || vram<=0 || ram<=0){ showResult('Enter CPU, GPU, VRAM and RAM values correctly.','Provide all required fields.',0); return; }
+    if(!cpu||!gpu||vram<=0||ram<=0){ showResult('Enter CPU, GPU, VRAM and RAM correctly','Provide all required fields.'); return; }
 
-  const cpuScoreTable={'AMD Ryzen 5 5600X':70,'AMD Ryzen 7 5800X':80,'AMD Ryzen 9 5900X':92,'AMD Ryzen 9 7950X':98,'Intel Core i5-12400':68,'Intel Core i7-13700K':88,'Intel Core i9-13900K':95,'Intel Core i9-14900K':99};
-  const gpuScoreTable={'NVIDIA RTX 3060':62,'NVIDIA RTX 3070':74,'NVIDIA RTX 3080':88,'NVIDIA RTX 3090':95,'NVIDIA RTX 4060':64,'NVIDIA RTX 4070':78,'NVIDIA RTX 4080':90,'NVIDIA RTX 4090':99,'AMD Radeon RX 6600':58,'AMD Radeon RX 6700 XT':70,'AMD Radeon RX 6800':80,'AMD Radeon RX 7900 XTX':93};
+    // CPU/GPU base scores
+    const cpuScore={'Intel Pentium Gold G7400':30,'Intel Core i3-12100':50,'AMD Ryzen 3 4100':45,'AMD Athlon 3000G':25,'Intel Core i3-13100':55,
+                    'Intel Core i5-12400':68,'Intel Core i5-13400':72,'AMD Ryzen 5 5600X':70,'AMD Ryzen 5 7600':75,'Intel Core i7-13700K':88,
+                    'Intel Core i7-14700K':92,'Intel Core i9-13900K':95,'Intel Core i9-14900K':99,'AMD Ryzen 9 5900X':92,'AMD Ryzen 9 7950X':98};
+    const gpuScore={'NVIDIA GTX 1050 Ti':40,'NVIDIA GTX 1650':45,'NVIDIA GTX 1660':55,'AMD Radeon RX 6400':38,'AMD Radeon RX 6500 XT':42,
+                    'NVIDIA RTX 3060':62,'NVIDIA RTX 3060 Ti':68,'NVIDIA RTX 3070':74,'AMD Radeon RX 6600 XT':65,'AMD Radeon RX 6700 XT':70,
+                    'NVIDIA RTX 3080':88,'NVIDIA RTX 3080 Ti':92,'NVIDIA RTX 3090':95,'NVIDIA RTX 4080':90,'NVIDIA RTX 4090':99,
+                    'AMD Radeon RX 7900 XT':88,'AMD Radeon RX 7900 XTX':93};
 
-  const cpuBase=cpuScoreTable[cpu]||70;
-  const gpuBase=gpuScoreTable[gpu]||70;
-  const channelMul=ramChannels==='Single'?0.95:ramChannels==='Dual'?1.05:1.12;
+    const cpuBase=cpuScore[cpu]||70; const gpuBase=gpuScore[gpu]||70;
+    const channelMul=ramChannels==='Single'?0.95:ramChannels==='Dual'?1.05:1.12;
+    const gpuPart=gpuBase*0.6+(vram*2.5); const cpuPart=cpuBase*0.25; 
+    const ramPart=(ram*0.6)*(ramSpeed/3000)*channelMul;
+    const ioPart=(pcie>=4?6:3)+Math.min(nvme/7000,1)*4;
+    let rawScore=gpuPart+cpuPart+ramPart+ioPart;
+    const score=Math.round(Math.min(100,rawScore/2));
 
-  const gpuPart=gpuBase*0.6+(vram*2.5);
-  const cpuPart=cpuBase*0.25;
-  const ramPart=(ram*0.6)*(ramSpeed/3000)*channelMul;
-  const ioPart=(pcie>=4?6:3)+Math.min(nvme/7000,1)*4;
-  let rawScore=gpuPart+cpuPart+ramPart+ioPart;
-  const score=Math.round(Math.min(100,(rawScore/2)));
+    // Productivity score (AI/Render/Coding/Gaming)
+    const aiScore=Math.round(score*1.05); const renderScore=Math.round(score*0.95);
+    const codingScore=Math.round(score*0.9); const gamingScore=Math.round(score*1.1);
 
-  const recommended=[];
-  if(vram<16) recommended.push('Consider GPU with ≥16GB VRAM');
-  if(ram<32) recommended.push('Consider ≥32GB system RAM');
-  if(pcie<4 && !gpu.includes('40')) recommended.push('PCIe 4.0+ recommended for modern GPUs');
-  if(power<650 && gpu.includes('4090')) recommended.push('High-end GPUs like 4090 need PSU ≈850W');
+    // System Cost Estimator (authentic)
+    let baseCost=0;
+    const cpuPrice={'Intel Pentium Gold G7400':6000,'Intel Core i3-12100':8000,'AMD Ryzen 3 4100':7500,'AMD Athlon 3000G':4000,'Intel Core i3-13100':8500,
+                    'Intel Core i5-12400':12000,'Intel Core i5-13400':13000,'AMD Ryzen 5 5600X':15000,'AMD Ryzen 5 7600':16000,'Intel Core i7-13700K':25000,
+                    'Intel Core i7-14700K':28000,'Intel Core i9-13900K':40000,'Intel Core i9-14900K':45000,'AMD Ryzen 9 5900X':35000,'AMD Ryzen 9 7950X':60000};
+    const gpuPrice={'NVIDIA GTX 1050 Ti':12000,'NVIDIA GTX 1650':15000,'NVIDIA GTX 1660':20000,'AMD Radeon RX 6400':11000,'AMD Radeon RX 6500 XT':14000,
+                    'NVIDIA RTX 3060':35000,'NVIDIA RTX 3060 Ti':40000,'NVIDIA RTX 3070':50000,'AMD Radeon RX 6600 XT':38000,'AMD Radeon RX 6700 XT':45000,
+                    'NVIDIA RTX 3080':80000,'NVIDIA RTX 3080 Ti':95000,'NVIDIA RTX 3090':120000,'NVIDIA RTX 4080':130000,'NVIDIA RTX 4090':200000,
+                    'AMD Radeon RX 7900 XT':110000,'AMD Radeon RX 7900 XTX':130000};
+    const ramPrice=ram*75; const storagePrice=storage.includes('512')?4000:storage.includes('1 TB')?7000:storage.includes('2 TB')?12000:3000;
+    const nvmePrice=nvme*2; const psuPrice=power*5; const tpuPrice=tpu==='None'?0:50000;
+    baseCost=cpuPrice[cpu]+gpuPrice[gpu]+ramPrice+storagePrice+nvmePrice+psuPrice+tpuPrice+customCost;
+    let costText=currency==='USD'?('≈ $'+Math.round(baseCost/82)):('₹ '+baseCost.toLocaleString());
 
-  // Cost estimation
-  const baseCost=cpuBase*10+gpuBase*15+ram*5+vram*20+nvme*0.05+power*0.5+customCost;
-  showResult('Estimated AI Performance Score: '+score,recommended.length?recommended.join(' • '):'System looks balanced',baseCost);
-}
+    // Recommendations
+    const recommended=[];
+    if(vram<16) recommended.push('Consider GPU with ≥16GB VRAM for larger models');
+    if(ram<32) recommended.push('Consider ≥32GB system RAM');
+    if(pcie<4 && !gpu.includes('40')) recommended.push('PCIe 4.0+ recommended for modern GPUs');
+    if(power<650 && gpu.includes('4090')) recommended.push('High-end GPUs like 4090 need PSU ≈ 850W');
 
-function showResult(title,meta,cost){ 
-  const card=document.getElementById('resultCard');
-  document.getElementById('scoreText').textContent=title;
-  document.getElementById('metaText').textContent=meta;
+    showResult(`AI Score: ${aiScore} • Render: ${renderScore} • Coding: ${codingScore} • Gaming: ${gamingScore}`,
+               recommended.length?recommended.join(' • '):'System looks balanced', costText);
+  }
 
-  let displayCost=cost; let symbol='$';
-  if(currency==='INR'){ displayCost=Math.round(cost*exchangeRate); symbol='₹'; }
-  document.getElementById('costText').textContent='💰 Estimated System Cost: '+symbol+displayCost;
+  function showResult(title,meta,cost){ 
+    const card=document.getElementById('resultCard'); 
+    document.getElementById('scoreText').textContent=title;
+    document.getElementById('metaText').textContent=meta;
+    document.getElementById('systemCost').textContent=cost;
+    card.hidden=false; card.scrollIntoView({behavior:'smooth',block:'center'});
+  }
 
-  card.hidden=false; card.scrollIntoView({behavior:'smooth',block:'center'});
-}
+  function resetForm(){ document.getElementById('form').reset(); document.getElementById('resultCard').hidden=true; }
 
-function resetForm(){ document.getElementById('form').reset(); document.getElementById('resultCard').hidden=true; }
-document.getElementById('cpu').selectedIndex=0; document.getElementById('gpu').selectedIndex=0;
+  function exportReport(){
+    const cpu=document.getElementById('cpu').value;
+    const gpu=document.getElementById('gpu').value;
+    const tpu=document.getElementById('tpu').value;
+    const vram=val('vram'); const ram=val('ram'); const ramSpeed=val('ramSpeed');
+    const ramChannels=document.getElementById('ramChannels').value;
+    const pcie=document.getElementById('pcie').value; const nvme=val('nvme'); 
+    const storage=document.getElementById('storage').value; const power=val('power'); 
+    const customCost=val('customCost'); const currency=document.getElementById('currency').value;
+
+    const report=`AI PC Configuration Report
+CPU: ${cpu}
+GPU: ${gpu}
+TPU/NPU: ${tpu}
+VRAM: ${vram} GB
+RAM: ${ram} GB (${ramSpeed} MHz, ${ramChannels})
+PCIe: ${pcie}
+NVMe: ${nvme} MB/s
+Storage: ${storage}
+PSU: ${power} W
+Custom Cost: ${customCost} ${currency}
+System Cost: ${document.getElementById('systemCost').textContent}
+`;
+
+    const blob=new Blob([report],{type:'text/plain'});
+    const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='AI_PC_Report.txt'; a.click();
+  }
+
+  // Defaults
+  document.getElementById('cpu').selectedIndex=0; 
+  document.getElementById('gpu').selectedIndex=0; 
+  document.getElementById('vram').value=24; 
+  document.getElementById('ram').value=64; 
+  document.getElementById('ramSpeed').value=3600; 
+  document.getElementById('nvme').value=5000; 
+  document.getElementById('power').value=750; 
+  document.getElementById('customCost').value=0;
 </script>
 </body>
 </html>
